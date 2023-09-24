@@ -4,16 +4,40 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Topico {
+import org.hibernate.annotations.ManyToAny;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity(name="Topico")
+@Table(name="topicos")
+public class Topico {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String titulo;
 	private String mensaje;
+	
 	private LocalDateTime fechaCreacion = LocalDateTime.now();
+	
+	@Enumerated(EnumType.STRING)
 	private StatusTopico status = StatusTopico.NO_RESPONDIDO;
+	
+	@ManyToOne
 	private Usuario autor;
+	
+	@ManyToAny()
 	private Curso curso;
-	private List<Respuesta> respuestas = new ArrayList<>();
+	
+	//private List<Respuesta> respuestas = new ArrayList<>();
 
 	public Topico(String titulo, String mensaje, Curso curso) {
 		this.titulo = titulo;
@@ -102,12 +126,12 @@ public class Topico {
 		this.curso = curso;
 	}
 
-	public List<Respuesta> getRespuestas() {
-		return respuestas;
-	}
+//	public List<Respuesta> getRespuestas() {
+//		return respuestas;
+//	}
 
-	public void setRespuestas(List<Respuesta> respuestas) {
-		this.respuestas = respuestas;
-	}
+//	public void setRespuestas(List<Respuesta> respuestas) {
+//		this.respuestas = respuestas;
+//	}
 
 }
