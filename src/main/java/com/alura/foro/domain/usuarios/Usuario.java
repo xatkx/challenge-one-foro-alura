@@ -101,5 +101,9 @@ public class Usuario {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+	
+	public UsuarioDTO getDTO() {
+		return new UsuarioDTO(this.getId(),this.getNombre(),this.getEmail());
+	}
 
 }

@@ -9,19 +9,4 @@ public record TopicoDTO(
 		StatusTopico status,String titulo
 		) {
 
-//	public TopicoDTO(Topico topico) {
-//
-//		this(
-//				topico.getId(),
-//				 topico.getAutor().getId(),
-//				topico.getCurso().getId(),
-//				topico.getfechaCreacion(),
-//				topico.getMensaje().toString(),
-//				topico.getStatus().toString(),
-//				topico.getTitulo()
-//				);
-//		
-//	}
-	
-
 }

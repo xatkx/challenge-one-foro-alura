@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.bind.Name;
 
 import com.alura.foro.domain.cursos.Curso;
 import com.alura.foro.domain.usuarios.Usuario;
+import com.alura.foro.domain.usuarios.UsuarioDTO;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -161,6 +162,8 @@ public class Topico {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+	
+	
 
 //	public List<Respuesta> getRespuestas() {
 //		return respuestas;

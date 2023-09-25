@@ -97,4 +97,11 @@ public class Curso {
 		this.categoria = categoria;
 	}
 
+
+
+	public CursoDTO getDTO() {
+		// TODO Auto-generated method stub
+		return new CursoDTO(id, nombre, categoria);
+	}
+
 }
