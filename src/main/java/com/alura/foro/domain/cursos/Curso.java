@@ -1,4 +1,4 @@
-package com.alura.modelo;
+package com.alura.foro.domain.cursos;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +22,32 @@ public class Curso {
 		this.categoria = categoria;
 	}
 	
+	
+	
+	public Curso() {
+		
+	}
+
+
+
+	public Curso(Long id, String nombre, String categoria) {
+		
+		this.id = id;
+		this.nombre = nombre;
+		this.categoria = categoria;
+	}
+
+
+
+	public Curso(CursoDTO curso) {
+		// TODO Auto-generated constructor stub	
+		this.id = curso.id();
+		this.nombre = curso.nombre();
+		this.categoria = curso.categoria();
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

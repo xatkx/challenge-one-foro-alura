@@ -1,11 +1,16 @@
-package com.alura.modelo;
+package com.alura.foro.domain.usuarios;
+
+import java.util.List;
 
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy;
+
+import com.alura.foro.domain.topicos.Topico;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity(name = "Usuario")
@@ -19,6 +24,26 @@ public class Usuario {
 	private String nombre;
 	private String email;
 	private String contrasena;
+	
+	@OneToMany
+	List<Topico> topicos;
+
+	public Usuario() {
+		super();
+	}
+
+	public Usuario(Long id, String nombre, String email, String contrasena) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.email = email;
+		this.contrasena = contrasena;
+	}
+
+	public Usuario(UsuarioDTO autor) {
+		// TODO Auto-generated constructor 
+		this.id = autor.id();
+	}
 
 	@Override
 	public int hashCode() {

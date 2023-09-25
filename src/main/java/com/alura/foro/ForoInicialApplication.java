@@ -1,6 +1,6 @@
 package com.alura.foro;
 
-import org.flywaydb.core.Flyway;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration.FlywayConfiguration;

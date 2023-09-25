@@ -1,18 +1,27 @@
-package com.alura.modelo;
+package com.alura.foro.domain.topicos;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
+import org.springframework.boot.context.properties.bind.Name;
 
+import com.alura.foro.domain.cursos.Curso;
+import com.alura.foro.domain.usuarios.Usuario;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity(name="Topico")
@@ -25,24 +34,51 @@ public class Topico {
 	
 	private String titulo;
 	private String mensaje;
-	
-	private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+	private String fechaCreacion = LocalDateTime.now().toString();
 	
 	@Enumerated(EnumType.STRING)
 	private StatusTopico status = StatusTopico.NO_RESPONDIDO;
 	
-	@ManyToOne
+	@ManyToOne //(fetch = FetchType.LAZY)
+	@JoinColumn(name = "autor_id") 
 	private Usuario autor;
 	
-	@ManyToAny()
+	@ManyToOne //(fetch = FetchType.LAZY)
+	@JoinColumn(name = "curso_id")
 	private Curso curso;
-	
+	public Topico() {
+		
+	}
 	//private List<Respuesta> respuestas = new ArrayList<>();
 
 	public Topico(String titulo, String mensaje, Curso curso) {
 		this.titulo = titulo;
 		this.mensaje = mensaje;
 		this.curso = curso;
+	}
+	
+
+	public Topico(Long id, String titulo, String mensaje, String fechaCreacion, StatusTopico status, Usuario autor,
+			Curso curso) {
+		this.id = id;
+		this.titulo = titulo;
+		this.mensaje = mensaje;
+		this.fechaCreacion = fechaCreacion;
+		this.status = status;
+		this.autor = autor;
+		this.curso = curso;
+	}
+
+
+	public Topico(TopicoDTO obj) {
+		// TODO Auto-generated constructor stub
+		this.mensaje = obj.mensaje();
+		this.titulo = obj.titulo();
+		this.status =  obj.status();
+		this.autor = new Usuario(obj.autor());
+		this.curso = new Curso(obj.curso());
+		
 	}
 
 	@Override
@@ -94,11 +130,11 @@ public class Topico {
 		this.mensaje = mensaje;
 	}
 
-	public LocalDateTime getfechaCreacion() {
+	public String getfechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public void setfechaCreacion(LocalDateTime fechaCreacion) {
+	public void setfechaCreacion(String fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
